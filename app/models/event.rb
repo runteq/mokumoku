@@ -19,6 +19,7 @@ class Event < ApplicationRecord
     validates :title
     validates :content
     validates :held_at
+    validates :gender
   end
   
   enum gender: { anyone: 0, woman_only: 1}
