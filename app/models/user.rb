@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   authenticates_with_sorcery!
-
+  
   has_many :events, dependent: :destroy
   has_many :event_attendances, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -28,6 +28,8 @@ class User < ApplicationRecord
         -> { joins(:notification_timings).merge(NotificationTiming.attended_to_event) }
   scope :allowing_liked_event_notification,
         -> { joins(:notification_timings).merge(NotificationTiming.liked_event) }
+  
+  enum gender: { man: 0, woman: 1}
 
   def owner?(event)
     event.user_id == id
